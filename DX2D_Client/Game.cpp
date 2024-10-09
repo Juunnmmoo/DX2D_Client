@@ -5,7 +5,7 @@ Game::Game()
 	: m_Hwnd(nullptr)
 	, m_Width(0)
 	, m_Height(0)
-	, m_ClearColor{0.f, 0.f, 0.f, 0.f}
+	, m_ClearColor{0.3f, 0.5f, 0.8f, 0.f}
 	, m_Device(nullptr)
 	, m_DeviceContext(nullptr)
 	, m_SwapChain(nullptr)
@@ -81,8 +81,13 @@ void Game::SetViewport()
 
 void Game::RenderBegine()
 {
+	// RenderTargetView PipeLine에 설정.
 	m_DeviceContext->OMSetRenderTargets(1, m_RenderTargetView.GetAddressOf(), nullptr);
+
+	// BackGround Color 초기화
 	m_DeviceContext->ClearRenderTargetView(m_RenderTargetView.Get(), m_ClearColor);
+
+	// Viewport를 PipeLine에 설정.
 	m_DeviceContext->RSSetViewports(1, &m_Viewport);
 }
 
